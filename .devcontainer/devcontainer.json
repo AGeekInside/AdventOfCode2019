@@ -1,7 +1,7 @@
 {
     "name": "Advent of Code 2019",
     "context": "..",
-    "dockerFile": "Dockerfile",
+    "dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
         "ms-python.python",
         "vscodevim.vim"
