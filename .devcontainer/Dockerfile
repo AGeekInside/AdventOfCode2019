@@ -45,16 +45,16 @@ RUN apt-get update \
     libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
     xz-utils tk-dev libffi-dev liblzma-dev python-openssl git \
   && rm -rf /var/lib/apt/lists/*
-USER ${DEV_USER}
-ENV HOME /home/${DEV_USER}
+USER ${USERNAME}
+ENV HOME /home/${USERNAME}
 
-RUN mkdir /home/${DEV_USER}/scripts
-#ADD resources/two_line_prompt.sh /home/${DEV_USER}/scripts/two_line_prompt.sh
+RUN mkdir /home/${USERNAME}/scripts
+#ADD resources/two_line_prompt.sh /home/${USERNAME}/scripts/two_line_prompt.sh
 
-#RUN echo "source /home/${DEV_USER}/scripts/two_line_prompt.sh" >> /home/${DEV_USER}/.bashrc
-#WORKDIR /home/${DEV_USER}
+#RUN echo "source /home/${USERNAME}/scripts/two_line_prompt.sh" >> /home/${USERNAME}/.bashrc
+#WORKDIR /home/${USERNAME}
 
-#ADD resources/start-dev-env.sh /home/${DEV_USER}/scripts/
+#ADD resources/start-dev-env.sh /home/${USERNAME}/scripts/
 
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 #RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
