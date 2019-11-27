@@ -2,8 +2,9 @@
     "name": "Advent of Code 2019",
     "context": "..",
     "dockerFile": ".devcontainer/Dockerfile",
-	"extensions": [
-        "ms-python.python",
+    "extensions": [
+    	"ms-python.python",
         "vscodevim.vim"
-	]
+    ],
+    "postCreateCommand": ["bash", ".devcontainer/install-dev-tools.sh"]
 }
