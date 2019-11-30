@@ -1,10 +1,4 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
-FROM python:3
-ARG MAINTAINER="AGeekInside <marcwbrooks@gmail.com>"
+FROM debian:buster-slim
 LABEL MAINTAINER $(MAINTAINER)
 
 # Avoid warnings by switching to noninteractive
@@ -28,11 +22,6 @@ RUN apt-get update \
     # Install pylint
     && pip --disable-pip-version-check --no-cache-dir install pylint \
     #
-    # Update Python environment based on requirements.txt
-    # && pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-    # && rm -rf /tmp/pip-tmp \
-    #
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     # [Optional] Add sudo support for the non-root user
@@ -62,5 +51,13 @@ RUN curl -ksSL "https://github.com/Originate/git-town/releases/download/v${GIT_T
 USER ${USERNAME}
 ENV HOME /home/${USERNAME}
 RUN mkdir /home/${USERNAME}/scripts
+
+RUN git clone git://github.com/yyuu/pyenv.git .pyenv
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+
+RUN pyenv install 3.8.0
+RUN pyenv global 3.8.0
+RUN pyenv rehash
 
 ENV DEBIAN_FRONTEND=dialog
