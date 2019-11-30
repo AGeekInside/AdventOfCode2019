@@ -48,6 +48,8 @@ ENV GIT_TOWN_VERSION 7.2.1
 RUN curl -ksSL "https://github.com/Originate/git-town/releases/download/v${GIT_TOWN_VERSION}/git-town-amd64.deb" -o /tmp/git-town-amd64.deb \
   && dpkg -i /tmp/git-town-amd64.deb
 
+RUN touch /home/${USERNAME}/got_here.txt
+
 USER ${USERNAME}
 ENV HOME /home/${USERNAME}
 RUN mkdir /home/${USERNAME}/scripts
